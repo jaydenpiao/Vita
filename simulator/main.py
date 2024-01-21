@@ -14,8 +14,9 @@ def create_patient_list(db, patient_metadata: list):
     for patient in patient_metadata:
         patient_id = patient["patient_id"]
         data = patient["data"]
+        path = patient["path"]
         patient = Patient.from_dict(db, COLLECTION_ID, patient_id, data)
-        patients.append(patient)
+        patients.append((patient, path))
     return patients
 
 # Authenticate with firebase

@@ -26,7 +26,7 @@ db = firestore.client()
 patients = create_patient_list(db, PATIENT_METADATA)
 
 # Run the event loop
-simulator = Simulator(patients)
+simulator = Simulator(patients, "./deploy.npz")
 try:
     simulator.start()
 except KeyboardInterrupt:

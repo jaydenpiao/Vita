@@ -29,7 +29,7 @@ const Map = () => {
   // }, []);
 
   return (
-    // <SafeAreaView style={styles.fullSafeAreaView}>
+    <SafeAreaView style={styles.fullSafeAreaView}>
       <MiMapView style={styles.mapView} ref={mapView} options={{
         mapId: '65ac4f4704c23e7916b1d0c8',
         key: '65ac610dca641a9a1399dc4b',
@@ -48,10 +48,17 @@ const Map = () => {
           const directions = departure?.directionsTo(destination);
           if (directions) {
             mapView.current?.Journey.draw(directions);
+            // mapView.current?.Camera.focusOn(departure); // zooms in on current location
+            
           }
+          mapView.current?.Camera.set({
+            rotation: 2.45,
+            zoom: 1600,
+            tilt: 0,
+          });
         }}
       />
-    // </SafeAreaView>
+    </SafeAreaView>
   );
 };
 
@@ -61,9 +68,6 @@ const styles = StyleSheet.create({
   },
   mapView: {
     flex: 1,
-    transform: [
-      { scale: 1.25 },
-    ],
   },
 });
 

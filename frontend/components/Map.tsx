@@ -8,6 +8,7 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 import { db } from '../db/firebaseConfig';
 import { doc, getDoc } from 'firebase/firestore';
 
+
 const venueOptions: TGetVenueOptions = {
   venue: 'mappedin-demo-mall',
   clientId: '5eab30aa91b055001a68e996',
@@ -55,6 +56,20 @@ const Map = () => {
   }, []);
 
 
+  // function to fetch randomized patient room every ~10s to simulate patient moving
+  // const fetchRoomNameFromServer = async () => {
+  //   const newRoomName = await getRoomNameFromServer();
+  //   setDestination(newRoomName);
+  // };
+
+  // useEffect(() => {
+  //   fetchRoomNameFromServer();
+  //   const intervalId = setInterval(() => {
+  //     fetchRoomNameFromServer();
+  //   }, 10000); // Fetch every 10 seconds
+  //   return () => clearInterval(intervalId);
+  // }, []);
+
   return (
     <SafeAreaView style={styles.fullSafeAreaView}>
       <TouchableOpacity 
@@ -92,6 +107,9 @@ const Map = () => {
             //     farRadius: 1, // The path size in metres at the furthest zoom
             //   }
             // });        
+
+            // mapView.current?.Camera.focusOn(departure); // zooms in on current location
+            
           }
           mapView.current?.Camera.set({
             rotation: 2.45,

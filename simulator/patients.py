@@ -5,7 +5,7 @@ from documents import Contact, SensorData
 PATIENT_METADATA = [
     {
         "patient_id": "0",
-        "path": [(0,0), (1,1), (2,2), (3,3), (4,4), (5,5)],
+        "path": ["KITCHEN", "DINING ROOM", "HEARTH ROOM", "ROOM 6", "BATH 6"],
         "data": {
             "name": "John Doe",
             "age": 25,
@@ -13,12 +13,12 @@ PATIENT_METADATA = [
             "room": "100A",
             "medical_history": "None",
             "emergency_contact": Contact(name="Jane Doe", phone="555-555-5555"),
-            "sensor_data": SensorData(ecg=[1, 2, 3], location={"lat": 0, "lon": 0})
+            "sensor_data": SensorData(ecg=[1, 2, 3], location="KITCHEN")
         }
     },
     {
         "patient_id": "1",
-        "path": [(5,5), (4,4), (3,3), (2,2), (1,1), (0,0)],
+        "path": ["HEARTH ROOM", "ROOM 1", "BATH 1", "ROOM 1", "HEARTH ROOM", "ROOM 2", "HEARTH ROOM"],
         "data": {
             "name": "Jeff Doe",
             "age": 45,

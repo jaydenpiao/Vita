@@ -51,7 +51,7 @@ class Contact:
 
 
 class SensorData:
-    def __init__(self, ecg: list, location: dict):
+    def __init__(self, ecg: list, location: str):
         self.__ecg = ecg
         self.__location = location
     
@@ -66,7 +66,7 @@ class SensorData:
         return self.__ecg
 
     @property
-    def location(self) -> dict:
+    def location(self) -> str:
         return self.__location
 
     

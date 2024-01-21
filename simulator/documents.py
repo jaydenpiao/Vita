@@ -105,6 +105,21 @@ class Patient(Document):
             "sensor_data": self.__sensor_data.to_dict()
         }
 
+    @staticmethod
+    def from_dict(db, collection_id: str, document_id: str, data: dict):
+        return Patient(
+            db,
+            collection_id,
+            document_id,
+            data["name"],
+            data["age"],
+            data["birthdate"],
+            data["room"],
+            data["medical_history"],
+            Contact(data["emergency_contact"]),
+            SensorData(data["sensor_data"])
+        )
+
     def __repr__(self):
         return f"Patient(name={self.__name}, age={self.__age}, birthdate={self.__birthdate}, " +
         f"room={self.__room}, medical_history={self.__medical_history}, " +

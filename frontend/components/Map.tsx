@@ -29,7 +29,7 @@ const Map = () => {
   // }, []);
 
   return (
-    <SafeAreaView style={styles.fullSafeAreaView}>
+    // <SafeAreaView style={styles.fullSafeAreaView}>
       <MiMapView style={styles.mapView} ref={mapView} options={{
         mapId: '65ac4f4704c23e7916b1d0c8',
         key: '65ac610dca641a9a1399dc4b',
@@ -51,7 +51,7 @@ const Map = () => {
           }
         }}
       />
-    </SafeAreaView>
+    // </SafeAreaView>
   );
 };
 
@@ -61,6 +61,9 @@ const styles = StyleSheet.create({
   },
   mapView: {
     flex: 1,
+    transform: [
+      { scale: 1.25 },
+    ],
   },
 });
 

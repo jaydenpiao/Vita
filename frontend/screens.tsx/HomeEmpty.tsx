@@ -3,9 +3,8 @@ import { useNavigation } from "@react-navigation/native";
 import { TouchableOpacity } from "react-native";
 
 const HomeEmpty = () => {
-  // for map
   const navigation = useNavigation();
-  // for map
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -24,18 +23,22 @@ const HomeEmpty = () => {
       </View>
 
       <View style={styles.patientsContainer}>
-        <Text style={styles.heading}>
-          You are currently not caring for any patients
-        </Text>
-        <Text style={styles.body}>
-          Get started by clicking the button below
-        </Text>
-        {/* for map */}
+        <View>
+          <Text style={styles.heading}>
+            You don't seem to be attending to any patients at the moment
+          </Text>
+          <Text style={styles.body}></Text>
+        </View>
         <TouchableOpacity
-          style={styles.button}
-          onPress={() => navigation.navigate("Map")}
-        ></TouchableOpacity>
-        {/* for map */}
+          style={styles.addPatients}
+          onPress={() => navigation.navigate("AddScreen")}
+        >
+          <Image
+            source={require("../assets/icons/add-patient-icon.png")}
+            style={styles.icon}
+          ></Image>
+          <Text>Add Patients</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -43,7 +46,11 @@ const HomeEmpty = () => {
 
 const styles = StyleSheet.create({
   header: { padding: 24, borderBottomWidth: 1, borderBottomColor: "#C6C6C8" },
-  container: { marginTop: 32 },
+  container: {
+    marginTop: 32,
+    display: "flex",
+    justifyContent: "space-between",
+  },
   icon: { height: 24, width: "auto", aspectRatio: "1 / 1" },
   locationText: { fontSize: 18 },
   locationContainer: {
@@ -62,7 +69,7 @@ const styles = StyleSheet.create({
     fontSize: 22,
     lineHeight: 28,
     letterSpacing: 0.35,
-    marginBottom: 12,
+    marginBottom: 8,
   },
   patientsContainer: {
     padding: 24,
@@ -71,17 +78,17 @@ const styles = StyleSheet.create({
     opacity: 0.6,
     fontSize: 17,
   },
-  // for map
-  button: {
-    backgroundColor: "#1C1C1E",
+  addPatients: {
+    gap: 4,
     borderRadius: 14,
-    height: 50,
     display: "flex",
-    marginBottom: 20,
-    justifyContent: "center",
+    flexDirection: "row",
     alignItems: "center",
+    justifyContent: "center",
+    borderWidth: 1,
+    height: 50,
+    borderColor: "#C6C6C8",
   },
-  // for map
 });
 
 export default HomeEmpty;

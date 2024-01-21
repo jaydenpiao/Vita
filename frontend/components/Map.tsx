@@ -1,12 +1,8 @@
 import {MiMapView, MapViewStore, MappedinLocation} from '@mappedin/react-native-sdk';
 import { getVenueMaker } from '@mappedin/react-native-sdk/core/packages/get-venue';
 import {TGetVenueOptions} from '@mappedin/react-native-sdk/core/packages/renderer/index.rn';
-import React, {useRef} from 'react';
+import React, {useRef, useState, useEffect} from 'react';
 import {SafeAreaView, StyleSheet} from 'react-native';
-// import { getVenue } from '@mappedin/mappedin-js';
-
-// mapView.current?.venueData?.locations?.find(...);
-
 
 const venueOptions: TGetVenueOptions = {
   venue: 'mappedin-demo-mall',
@@ -14,19 +10,23 @@ const venueOptions: TGetVenueOptions = {
   clientSecret: 'RJyRXKcryCMy4erZqqCbuB1NbR66QTGNXVE0x3Pg6oCIlUR1',
 };
 
-// let startLocation;
-
-// async function init() {
-//   const venue = await getVenue(venueOptions);
-
-//   startLocation = venue.locations.find(
-//     (location) => location.name === 'Pantry'
-//   );
-// }
-// init()
-
 const Map = () => {
   const mapView = React.useRef<MapViewStore>(null);
+  const [destinationRoom, setDestinationRoom] = useState('LIBRARY');
+
+  // function to fetch randomized patient room every ~10s to simulate patient moving
+  // const fetchRoomNameFromServer = async () => {
+  //   const newRoomName = await getRoomNameFromServer();
+  //   setDestination(newRoomName);
+  // };
+
+  // useEffect(() => {
+  //   fetchRoomNameFromServer();
+  //   const intervalId = setInterval(() => {
+  //     fetchRoomNameFromServer();
+  //   }, 10000); // Fetch every 10 seconds
+  //   return () => clearInterval(intervalId);
+  // }, []);
 
   return (
     <SafeAreaView style={styles.fullSafeAreaView}>
@@ -40,7 +40,7 @@ const Map = () => {
             (l: MappedinLocation) => l.name === 'PANTRY',
           );
           const destination = mapView.current?.venueData?.locations.find(
-            (l: MappedinLocation) => l.name === 'ROOM 5',
+            (l: MappedinLocation) => l.name === destinationRoom,
           );
           if (!departure || !destination) {
             return;

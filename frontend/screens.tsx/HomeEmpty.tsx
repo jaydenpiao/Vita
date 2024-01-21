@@ -3,6 +3,9 @@ import { useNavigation } from "@react-navigation/native";
 import { TouchableOpacity } from "react-native";
 
 const HomeEmpty = () => {
+  // for map
+  const navigation = useNavigation();
+  // for map
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -27,6 +30,12 @@ const HomeEmpty = () => {
         <Text style={styles.body}>
           Get started by clicking the button below
         </Text>
+        {/* for map */}
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigation.navigate("Map")}
+        ></TouchableOpacity>
+        {/* for map */}
       </View>
     </View>
   );
@@ -62,6 +71,17 @@ const styles = StyleSheet.create({
     opacity: 0.6,
     fontSize: 17,
   },
+  // for map
+  button: {
+    backgroundColor: "#1C1C1E",
+    borderRadius: 14,
+    height: 50,
+    display: "flex",
+    marginBottom: 20,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  // for map
 });
 
 export default HomeEmpty;

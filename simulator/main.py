@@ -18,7 +18,6 @@ def create_patient_list(db, patient_metadata: list):
         patients.append(patient)
     return patients
 
-
 # Authenticate with firebase
 cred = firebase_admin.credentials.Certificate("./credentials.json")
 app = firebase_admin.initialize_app(cred)
@@ -28,9 +27,9 @@ patients = create_patient_list(db, PATIENT_METADATA)
 # Run the event loop
 simulator = Simulator(patients)
 try:
-    asyncio.run(simulator.start())
+    simulator.start()
 except KeyboardInterrupt:
     # Allow the program to exit on Ctrl+C
     pass
 finally:
-    asyncio.run(simulator.stop())
+    print("Exiting Simulation...")

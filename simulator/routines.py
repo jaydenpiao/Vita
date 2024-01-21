@@ -9,6 +9,7 @@ class PatientRoutine:
     def __init__(self, patient: Patient, path: list, norm_ecgs, mi_ecgs, model, sleep_period_sec: int = 5):
         self.patient = patient
         self.path = path
+        self.room = path[0]
         self.path_index = 0
         self.path_index_increment = 1
         self.norm_ecg_index = 0
@@ -66,13 +67,14 @@ class PatientRoutine:
         return self.ecg
 
     async def __get_updated_location(self):
-        room = self.path[self.path_index]
-        self.path_index += self.path_index_increment
-        if self.path_index >= len(self.path) - 1:
-            self.path_index_increment = -1
-        elif self.path_index <= 0:
-            self.path_index_increment = 1
-        return room
+        if not self.is_having_heart_attack:
+            self.room = self.path[self.path_index]
+            self.path_index += self.path_index_increment
+            if self.path_index >= len(self.path) - 1:
+                self.path_index_increment = -1
+            elif self.path_index <= 0:
+                self.path_index_increment = 1
+        return self.room
 
     async def __check_for_mi(self):
         if len(self.ecg) == 0:

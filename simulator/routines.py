@@ -3,6 +3,7 @@ from documents import Patient, SensorData
 import random
 import numpy as np
 import tensorflow as tf
+import pdb
 
 class PatientRoutine:
     def __init__(self, patient: Patient, path: list, norm_ecgs, mi_ecgs, model, sleep_period_sec: int = 5):
@@ -34,8 +35,12 @@ class PatientRoutine:
             self.patient.update(sensor_data=await self.__get_updated_sensor_data())
             self.patient.send_update(full_update=False)
         
-        if await self.__check_for_mi():
-            print("Patient is having a heart attack!")
+        # The model is more sensitive to heart attacks than we want it to be...
+        is_heart_attack = await self.__check_for_mi()
+        if (is_heart_attack) and self.is_ecg_normal:
+            print("False alarm!")
+        elif is_heart_attack:
+            print("Heart attack!")
 
     async def __get_updated_sensor_data(self):
         return SensorData(
@@ -68,8 +73,7 @@ class PatientRoutine:
     async def __check_for_mi(self):
         if len(self.ecg) == 0:
             return False
-        ecg = np.array(self.ecg).reshape(1, 1, 1000).transpose((0, 2, 1))
-        print(ecg.shape)
+        ecg = np.array(self.ecg).reshape(1, 1000, 1)
         prediction = self.model.predict(ecg)
         print(prediction)
         return prediction[0][0] > 0.5
@@ -85,8 +89,8 @@ class Simulator:
         self.routines = []
 
         ecg_data = np.load(ecg_path)
-        normal_ecgs = ecg_data["ecgs"][ecg_data["labels"] == 0]
-        mi_ecgs = ecg_data["ecgs"][ecg_data["labels"] == 1]
+        normal_ecgs = ecg_data["ecgs"][(ecg_data["labels"] == 0).squeeze()]
+        mi_ecgs = ecg_data["ecgs"][(ecg_data["labels"] == 1).squeeze()]
         model = tf.keras.models.load_model(model_path)
 
         for idx, p in enumerate(patients):

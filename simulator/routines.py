@@ -67,7 +67,7 @@ class PatientRoutine:
         return self.ecg
 
     async def __get_updated_location(self):
-        if not self.is_having_heart_attack:
+        if not self.is_heart_attack:
             self.room = self.path[self.path_index]
             self.path_index += self.path_index_increment
             if self.path_index >= len(self.path) - 1:

@@ -2,7 +2,8 @@ import {MiMapView, MapViewStore, MappedinLocation, MappedinPolygon} from '@mappe
 import { getVenueMaker } from '@mappedin/react-native-sdk/core/packages/get-venue';
 import {TGetVenueOptions} from '@mappedin/react-native-sdk/core/packages/renderer/index.rn';
 import React, {useRef, useState, useEffect} from 'react';
-import {SafeAreaView, StyleSheet} from 'react-native';
+import {SafeAreaView, StyleSheet, TouchableOpacity, Text } from 'react-native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
 import { db } from '../db/firebaseConfig';
 import { doc, getDoc } from 'firebase/firestore';
@@ -26,11 +27,15 @@ const rooms = ['ROOM 1', 'ROOM 2', 'ROOM 3', 'ROOM 4', 'ROOM 5', 'ROOM 6', 'ROOM
 const Map = () => {
   const mapView = React.useRef<MapViewStore>(null);
   const [destinationRoom, setDestinationRoom] = useState('HEARTH ROOM'); 
+  const navigation = useNavigation();
+
+  const route = useRoute();
+  const patientId = route.params?.patientId ?? '0';
   
   // Function to fetch patient data from Firestore
   const fetchPatientData = async () => {
     try {
-      const docRef = doc(db, 'patients', '0');
+      const docRef = doc(db, 'patients', patientId);
       const docSnap = await getDoc(docRef);
 
       if (docSnap.exists()) {
@@ -52,6 +57,12 @@ const Map = () => {
 
   return (
     <SafeAreaView style={styles.fullSafeAreaView}>
+      <TouchableOpacity 
+        style={styles.backButton} 
+        onPress={() => navigation.navigate('AddScreen')}
+      >
+        <Text>Back</Text>
+      </TouchableOpacity>
       <MiMapView style={styles.mapView} ref={mapView} options={{
         mapId: '65ac4f4704c23e7916b1d0c8',
         key: '65ac610dca641a9a1399dc4b',
@@ -99,6 +110,15 @@ const styles = StyleSheet.create({
   },
   mapView: {
     flex: 1,
+  },
+  backButton: {
+    position: 'absolute',
+    top: 60,
+    left: 10,
+    padding: 10,
+    zIndex: 1, // Ensure button is above the map
+    backgroundColor: 'white', // Change as needed
+    borderRadius: 5, // Optional for rounded corners
   },
 });
 

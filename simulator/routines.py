@@ -4,7 +4,7 @@ import random
 
 
 class PatientRoutine:
-    def __init__(self, patient: Patient, path: list, sleep_period_sec: int = 2):
+    def __init__(self, patient: Patient, path: list, sleep_period_sec: int = 5):
         self.patient = patient
         self.path = path
         self.path_index = 0

@@ -1,6 +1,7 @@
-import React from "react";
+import React, {useState} from "react";
 import { Text, View, StyleSheet } from "react-native";
 import { Image } from "react-native";
+import CheckBox from '@react-native-community/checkbox';
 
 type ProfileProps = {
   imgLink: string;
@@ -9,12 +10,14 @@ type ProfileProps = {
 };
 
 const HomeProfileCard = (props: ProfileProps) => {
+  const [isSelected, setSelection] = useState(false);
+  
   return (
     <View style={styles.homeProfileCard}>
       <Image
         style={styles.img}
         source={require("../assets/patients/patient-1.png")}
-      ></Image>
+      />
       <View>
         <Text style={styles.name}>{props.name}</Text>
         <Text style={styles.age}>{props.age} years old</Text>

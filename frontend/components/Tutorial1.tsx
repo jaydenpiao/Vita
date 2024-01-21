@@ -1,30 +1,26 @@
-import React from "react";
-import { View, Text, Button, StyleSheet } from "react-native";
-import { TouchableOpacity } from "react-native";
-import { PageIndicator } from "react-native-page-indicator";
+import { View, Text, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import Tutorial1 from "./Tutorial1";
+import { TouchableOpacity } from "react-native";
 
-const Welcome = () => {
+const Tutorial1 = () => {
   const navigation = useNavigation();
 
   return (
     <View style={styles.container}>
       <View style={styles.pageIndicators}>
         <View style={styles.indicatorActive}></View>
-        <View style={styles.indicatorInactive}></View>
+        <View style={styles.indicatorActive}></View>
         <View style={styles.indicatorInactive}></View>
         <View style={styles.indicatorInactive}></View>
       </View>
       <View>
-        <Text style={styles.heading}>Your patients, our priority, always</Text>
+        <Text style={styles.heading}>Add patients for attentive tracking</Text>
         <Text style={styles.text}>
-          Vita allows caregivers to watch over their patients' well-being, even
-          from a distance.
+          Vita makes monitoring patients’ health and safety a whole lot easier.
         </Text>
         <TouchableOpacity
           style={styles.button}
-          onPress={() => navigation.navigate("Tutorial1")}
+          onPress={() => navigation.navigate("Tutorial2")}
         >
           <Text style={styles.buttonText}>Continue</Text>
         </TouchableOpacity>
@@ -86,4 +82,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Welcome;
+export default Tutorial1;

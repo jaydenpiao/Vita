@@ -1,32 +1,28 @@
-import React from "react";
-import { View, Text, Button, StyleSheet } from "react-native";
-import { TouchableOpacity } from "react-native";
-import { PageIndicator } from "react-native-page-indicator";
+import { View, Text, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import Tutorial1 from "./Tutorial1";
+import { TouchableOpacity } from "react-native";
 
-const Welcome = () => {
+const Tutorial3 = () => {
   const navigation = useNavigation();
 
   return (
     <View style={styles.container}>
       <View style={styles.pageIndicators}>
         <View style={styles.indicatorActive}></View>
-        <View style={styles.indicatorInactive}></View>
-        <View style={styles.indicatorInactive}></View>
-        <View style={styles.indicatorInactive}></View>
+        <View style={styles.indicatorActive}></View>
+        <View style={styles.indicatorActive}></View>
+        <View style={styles.indicatorActive}></View>
       </View>
       <View>
-        <Text style={styles.heading}>Your patients, our priority, always</Text>
+        <Text style={styles.heading}>And that’s it.</Text>
         <Text style={styles.text}>
-          Vita allows caregivers to watch over their patients' well-being, even
-          from a distance.
+          Ready to embrace the magic of AI-powered remote monitoring?
         </Text>
         <TouchableOpacity
           style={styles.button}
-          onPress={() => navigation.navigate("Tutorial1")}
+          onPress={() => navigation.navigate("HomeEmpty")}
         >
-          <Text style={styles.buttonText}>Continue</Text>
+          <Text style={styles.buttonText}>Next</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -86,4 +82,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Welcome;
+export default Tutorial3;

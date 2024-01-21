@@ -88,7 +88,7 @@ class Patient(Document):
         super().__init__(db, collection_id, document_id)
         self.__name = name
         self.__age = age
-        self.__birthdate = birthdate
+        self.__birthdate = datetime.strftime(birthdate, "%Y-%m-%d")
         self.__room = room
         self.__medical_history = medical_history
         self.__emergency_contact = emergency_contact
@@ -121,8 +121,8 @@ class Patient(Document):
         )
 
     def __repr__(self):
-        return f"Patient(name={self.__name}, age={self.__age}, birthdate={self.__birthdate}, " +
-        f"room={self.__room}, medical_history={self.__medical_history}, " +
+        return f"Patient(name={self.__name}, age={self.__age}, birthdate={self.__birthdate}, " +\
+        f"room={self.__room}, medical_history={self.__medical_history}, " +\
         f"emergency_contact={self.__emergency_contact}, sensor_data={self.__sensor_data})"
 
     def update(self, **kwargs):

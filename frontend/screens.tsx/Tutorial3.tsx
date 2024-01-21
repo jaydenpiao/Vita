@@ -20,7 +20,7 @@ const Tutorial3 = () => {
         </Text>
         <TouchableOpacity
           style={styles.button}
-          onPress={() => navigation.navigate("HomeEmpty")}
+          onPress={() => navigation.navigate("AddScreen")}
         >
           <Text style={styles.buttonText}>Next</Text>
         </TouchableOpacity>

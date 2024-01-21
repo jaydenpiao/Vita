@@ -28,10 +28,23 @@ const rooms = ['ROOM 1', 'ROOM 2', 'ROOM 3', 'ROOM 4', 'ROOM 5', 'ROOM 6', 'ROOM
 const Map = () => {
   const mapView = React.useRef<MapViewStore>(null);
   const [destinationRoom, setDestinationRoom] = useState('HEARTH ROOM'); 
+  // const [showOverlay, setShowOverlay] = useState(false);
   const navigation = useNavigation();
 
   const route = useRoute();
   const patientId = route.params?.patientId ?? '0';
+
+  
+  // useEffect(() => {
+  //   if (route.params?.showOverlay) {
+  //     setShowOverlay(true);
+  //   }
+  //   // ... existing useEffect code
+  // }, [route.params]);
+
+  // const handleDismissOverlay = () => {
+  //   setShowOverlay(false);
+  // }
   
   // Function to fetch patient data from Firestore
   const fetchPatientData = async () => {
@@ -42,7 +55,12 @@ const Map = () => {
       if (docSnap.exists()) {
         console.log("Patient 0's Location:", docSnap.data().location);
         setDestinationRoom(docSnap.data().location);
-      } else {
+
+        // Check for 'is_having_heart_attack' field
+        if (docSnap.data().is_having_heart_attack) {
+          console.log('yay');
+      } 
+    } else {
         console.log('No such document!');
       }
     } catch (error) {

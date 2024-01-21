@@ -20,9 +20,13 @@ const rooms = ['ROOM 1', 'ROOM 2', 'ROOM 3', 'ROOM 4', 'ROOM 5', 'ROOM 6', 'ROOM
               'PATIO', 'PORCH',
               'HEARTH ROOM', 'DINING ROOM', 'LIBRARY'];
 
-const Map = () => {
+const PatientMap = () => {
   const mapView = React.useRef<MapViewStore>(null);
-  const [destinationRoom, setDestinationRoom] = useState('HEARTH ROOM');
+  const [patient1, setPatient1] = useState('HEARTH ROOM');
+  const [patient2, setPatient2] = useState('ROOM 1');
+  const [patient3, setPatient3] = useState('KITCHEN');
+  const [patient4, setPatient4] = useState('PATIO');
+  const [patient5, setPatient5] = useState('BATH 3');
 
   // function to fetch randomized patient room every ~10s to simulate patient moving
   // const fetchRoomNameFromServer = async () => {
@@ -46,21 +50,30 @@ const Map = () => {
         secret: '63fae86d7074a4e4ec75876f92711afd6e93d9e5f6b5609933808e6dabbad40b',
         }} 
         onFirstMapLoaded={() => {
+            
+
+            
+                
+            
           const departure = mapView.current?.venueData?.locations.find(
             (l: MappedinLocation) => l.name === 'PANTRY',
           );
           const destination = mapView.current?.venueData?.locations.find(
-            (l: MappedinLocation) => l.name === destinationRoom,
+            (l: MappedinLocation) => l.name === patient1,
           );
           if (!departure || !destination) {
             return;
           }
-          const directions = departure?.directionsTo(destination);
-          if (directions) {
-            mapView.current?.Journey.draw(directions);
-            // mapView.current?.Camera.focusOn(departure); // zooms in on current location
+
+        //   mapView.current?.BlueDot.enable();
+        //   mapView.current?.overrideLocation()
+
+        //   const directions = departure?.directionsTo(destination);
+        //   if (directions) {
+        //     mapView.current?.Journey.draw(directions);
+        //     // mapView.current?.Camera.focusOn(departure); // zooms in on current location
             
-          }
+        //   }
           mapView.current?.Camera.set({
             rotation: 2.45,
             zoom: 1600,
@@ -86,5 +99,5 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Map;
+export default PatientMap;
 

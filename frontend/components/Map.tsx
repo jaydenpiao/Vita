@@ -4,6 +4,9 @@ import {TGetVenueOptions} from '@mappedin/react-native-sdk/core/packages/rendere
 import React, {useRef, useState, useEffect} from 'react';
 import {SafeAreaView, StyleSheet} from 'react-native';
 
+import { db } from '../db/firebaseConfig';
+import { doc, getDoc } from 'firebase/firestore';
+
 const venueOptions: TGetVenueOptions = {
   venue: 'mappedin-demo-mall',
   clientId: '5eab30aa91b055001a68e996',
@@ -22,21 +25,30 @@ const rooms = ['ROOM 1', 'ROOM 2', 'ROOM 3', 'ROOM 4', 'ROOM 5', 'ROOM 6', 'ROOM
 
 const Map = () => {
   const mapView = React.useRef<MapViewStore>(null);
-  const [destinationRoom, setDestinationRoom] = useState('HEARTH ROOM');
+  const [destinationRoom, setDestinationRoom] = useState('HEARTH ROOM'); 
+  
+  // Function to fetch patient data from Firestore
+  const fetchPatientData = async () => {
+    try {
+      const docRef = doc(db, 'patients', '0');
+      const docSnap = await getDoc(docRef);
 
-  // function to fetch randomized patient room every ~10s to simulate patient moving
-  // const fetchRoomNameFromServer = async () => {
-  //   const newRoomName = await getRoomNameFromServer();
-  //   setDestination(newRoomName);
-  // };
+      if (docSnap.exists()) {
+        console.log("Patient 0's Location:", docSnap.data().location);
+        setDestinationRoom(docSnap.data().location);
+      } else {
+        console.log('No such document!');
+      }
+    } catch (error) {
+      console.error('Error fetching patient data:', error);
+    }
+  };
 
-  // useEffect(() => {
-  //   fetchRoomNameFromServer();
-  //   const intervalId = setInterval(() => {
-  //     fetchRoomNameFromServer();
-  //   }, 10000); // Fetch every 10 seconds
-  //   return () => clearInterval(intervalId);
-  // }, []);
+  useEffect(() => {
+    fetchPatientData();
+    // ... [rest of your existing useEffect code]
+  }, []);
+
 
   return (
     <SafeAreaView style={styles.fullSafeAreaView}>
@@ -57,20 +69,24 @@ const Map = () => {
           }
           const directions = departure?.directionsTo(destination);
           if (directions) {
-            mapView.current?.Journey.draw(directions);
-            // mapView.current?.Camera.focusOn(departure); // zooms in on current location
-            
+            mapView.current?.Journey.draw(directions, {
+              pathOptions: {
+                nearRadius: 0.5,
+              }
+            });
+           
+            // mapView.Journey.draw(directions, {
+            //   pathOptions: {
+            //     nearRadius: 0.25, // The path size in metres at the nearest zoom
+            //     farRadius: 1, // The path size in metres at the furthest zoom
+            //   }
+            // });        
           }
           mapView.current?.Camera.set({
             rotation: 2.45,
             zoom: 1600,
             tilt: 0,
           });
-          console.log(directions.instructions);
-          console.log(directions.path);
-          
-          // console.log(departure.description);
-          // console.log(destination.polygons);
         }}
       />
     </SafeAreaView>

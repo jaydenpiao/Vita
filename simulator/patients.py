@@ -1,9 +1,10 @@
 from dataclasses import dataclass
 from datetime import datetime
+from documents import Contact, SensorData
 
 PATIENT_METADATA = [
     {
-        "patient_id": 0,
+        "patient_id": "0",
         "data": {
             "name": "John Doe",
             "age": 25,
@@ -15,7 +16,7 @@ PATIENT_METADATA = [
         }
     },
     {
-        "patient_id": 1,
+        "patient_id": "1",
         "data": {
             "name": "Jeff Doe",
             "age": 45,

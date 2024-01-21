@@ -1,21 +1,11 @@
 import asyncio
+from documents import Patient
 
 class PatientRoutine:
     def __init__(self, patient: Patient):
         self.patient = patient
-        self.task = None
-        self.loop = None
 
-    def start(self):
-        self.loop = asyncio.get_event_loop()
-        self.task = self.loop.create_task(self.__routine())
-        self.loop.run_forever(self.task)
-
-    def stop(self):
-        self.task.cancel()
-        self.loop.close()
-
-    async def __routine(self):
+    async def routine(self):
         await asyncio.sleep(2)
         print(self.patient)
 
@@ -23,14 +13,20 @@ class PatientRoutine:
 class Simulator:
     def __init__(self, patients: list):
         self.patients = patients
+        self.task = None
+        self.loop = None
         self.routines = []
         for patient in patients:
             self.routines.append(PatientRoutine(patient))
 
-    def start(self):
+    async def start(self):
+        tasks = []
         for routine in self.routines:
-            routine.start()
+            tasks.append(asyncio.create_task(routine.routine()))
+        self.loop = asyncio.get_running_loop()
+        self.task = self.loop.create_task(asyncio.gather(*tasks))
+        self.loop.run_forever()
 
-    def stop(self):
-        for routine in self.routines:
-            routine.stop()    
+    async def stop(self):
+        self.task.cancel()
+        self.loop.stop()    

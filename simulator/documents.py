@@ -116,8 +116,8 @@ class Patient(Document):
             data["birthdate"],
             data["room"],
             data["medical_history"],
-            Contact(data["emergency_contact"]),
-            SensorData(data["sensor_data"])
+            data["emergency_contact"],
+            data["sensor_data"]
         )
 
     def __repr__(self):

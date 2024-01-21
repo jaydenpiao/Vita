@@ -1,32 +1,32 @@
-import React from "react";
-import { View, Text, Button, StyleSheet } from "react-native";
-import { TouchableOpacity } from "react-native";
-import { PageIndicator } from "react-native-page-indicator";
+import { View, Text, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import Tutorial1 from "./Tutorial1";
+import { TouchableOpacity } from "react-native";
 
-const Welcome = () => {
+const Tutorial2 = () => {
   const navigation = useNavigation();
 
   return (
     <View style={styles.container}>
       <View style={styles.pageIndicators}>
         <View style={styles.indicatorActive}></View>
-        <View style={styles.indicatorInactive}></View>
-        <View style={styles.indicatorInactive}></View>
+        <View style={styles.indicatorActive}></View>
+        <View style={styles.indicatorActive}></View>
         <View style={styles.indicatorInactive}></View>
       </View>
       <View>
-        <Text style={styles.heading}>Your patients, our priority, always</Text>
+        <Text style={styles.heading}>
+          Get notified when a patient needs help
+        </Text>
         <Text style={styles.text}>
-          Vita allows caregivers to watch over their patients' well-being, even
-          from a distance.
+          Allow notifications to receive alerts to stay updated on your
+          patients’ conditions.
         </Text>
         <TouchableOpacity
           style={styles.button}
-          onPress={() => navigation.navigate("Tutorial1")}
+          onPress={() => navigation.navigate("Tutorial3")}
         >
-          <Text style={styles.buttonText}>Continue</Text>
+          <Text style={styles.buttonText}>Enable Notifications</Text>
+          {/* TODO Implement push functionality */}
         </TouchableOpacity>
       </View>
     </View>
@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
   container: {
     display: "flex",
     padding: 24,
-    marginTop: 32,
+    marginTop: 40,
     gap: 20,
     flex: 1,
     justifyContent: "space-between",
@@ -86,4 +86,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Welcome;
+export default Tutorial2;

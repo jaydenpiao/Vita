@@ -1,4 +1,4 @@
-import {MiMapView, MapViewStore, MappedinLocation} from '@mappedin/react-native-sdk';
+import {MiMapView, MapViewStore, MappedinLocation, MappedinPolygon} from '@mappedin/react-native-sdk';
 import { getVenueMaker } from '@mappedin/react-native-sdk/core/packages/get-venue';
 import {TGetVenueOptions} from '@mappedin/react-native-sdk/core/packages/renderer/index.rn';
 import React, {useRef, useState, useEffect} from 'react';
@@ -10,9 +10,19 @@ const venueOptions: TGetVenueOptions = {
   clientSecret: 'RJyRXKcryCMy4erZqqCbuB1NbR66QTGNXVE0x3Pg6oCIlUR1',
 };
 
+const rooms = ['ROOM 1', 'ROOM 2', 'ROOM 3', 'ROOM 4', 'ROOM 5', 'ROOM 6', 'ROOM 7', 'ROOM 8', 'ROOM 9', 'ROOM 10', 'ROOM 11', 'ROOM 12',
+              'BATH 1', 'BATH 2', 'BATH 3', 'BATH 4', 'BATH 5', 'BATH 6', 'BATH 7', 'BATH 8', 'BATH 9', 'BATH 10', 'BATH 11', 'BATH 12',
+              'CLOSET A', 'CLOSET B', 'CLOSET C', 'CLOSET D',
+              'MECHANICAL ROOM A', 'MECHANICAL ROOM B',
+              'UTILITY ROOM A', 'UTILITY ROOM B',
+              'SPA', 'SPA BATH',
+              'KITCHEN', 'PANTRY',
+              'PATIO', 'PORCH',
+              'HEARTH ROOM', 'DINING ROOM', 'LIBRARY'];
+
 const Map = () => {
   const mapView = React.useRef<MapViewStore>(null);
-  const [destinationRoom, setDestinationRoom] = useState('LIBRARY');
+  const [destinationRoom, setDestinationRoom] = useState('HEARTH ROOM');
 
   // function to fetch randomized patient room every ~10s to simulate patient moving
   // const fetchRoomNameFromServer = async () => {
@@ -56,6 +66,11 @@ const Map = () => {
             zoom: 1600,
             tilt: 0,
           });
+          console.log(directions.instructions);
+          console.log(directions.path);
+          
+          // console.log(departure.description);
+          // console.log(destination.polygons);
         }}
       />
     </SafeAreaView>

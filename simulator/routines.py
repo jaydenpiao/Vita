@@ -16,6 +16,7 @@ class PatientRoutine:
         self.mi_ecg_index = 0
         self.mi_ecgs = mi_ecgs
         self.is_ecg_normal = True
+        self.is_heart_attack = False
         self.model = model
         self.sleep_period_sec = sleep_period_sec
         self.first_routine_executed = False
@@ -32,20 +33,23 @@ class PatientRoutine:
             self.patient.send_update(full_update=True)
             self.first_routine_executed = True
         else:
-            self.patient.update(sensor_data=await self.__get_updated_sensor_data())
-            self.patient.send_update(full_update=False)
-        
             # The model is more sensitive to heart attacks than we want it to be...
             is_heart_attack = await self.__check_for_mi()
             if (is_heart_attack) and self.is_ecg_normal:
-                print("False alarm!")
+                self.is_heart_attack = False
             elif is_heart_attack:
-                print("Heart attack!")
+                self.is_heart_attack = True
+            else:
+                self.is_heart_attack = False
+
+            self.patient.update(sensor_data=await self.__get_updated_sensor_data())
+            self.patient.send_update(full_update=False)
 
     async def __get_updated_sensor_data(self):
         return SensorData(
             ecg=await self.__get_updated_ecg(),
-            location=await self.__get_updated_location()
+            location=await self.__get_updated_location(),
+            is_having_heart_attack=self.is_heart_attack
         )
 
     async def __get_updated_ecg(self):

@@ -13,7 +13,7 @@ PATIENT_METADATA = [
             "room": "100A",
             "medical_history": "None",
             "emergency_contact": Contact(name="Jane Doe", phone="555-555-5555"),
-            "sensor_data": SensorData(ecg=[1, 2, 3], location="KITCHEN")
+            "sensor_data": SensorData(ecg=[1, 2, 3], location="KITCHEN", is_having_heart_attack=False)
         }
     },
     {
@@ -26,7 +26,7 @@ PATIENT_METADATA = [
             "room": "200A",
             "medical_history": "History of heart disease",
             "emergency_contact": Contact(name="Jane Doe", phone="555-555-5555"),
-            "sensor_data": SensorData(ecg=[5, 4, 3], location={"lat": 0, "lon": 0})
+            "sensor_data": SensorData(ecg=[5, 4, 3], location="HEARTH ROOM", is_having_heart_attack=False)
         }
     }
 ]

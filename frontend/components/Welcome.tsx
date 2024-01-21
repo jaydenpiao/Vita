@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, Button, StyleSheet } from "react-native";
+import { View, Text, Button, StyleSheet, Image } from "react-native";
 import { TouchableOpacity } from "react-native";
 import { PageIndicator } from "react-native-page-indicator";
 import { useNavigation } from "@react-navigation/native";
@@ -16,6 +16,11 @@ const Welcome = () => {
         <View style={styles.indicatorInactive}></View>
         <View style={styles.indicatorInactive}></View>
       </View>
+      {/* image */}
+      <Image
+    source={require("../assets/welcome.png")} // Update with the correct path
+    style={styles.welcomeImage}
+  />
       <View>
         <Text style={styles.heading}>Your patients, our priority, always</Text>
         <Text style={styles.text}>
@@ -83,6 +88,14 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginBottom: 24,
     opacity: 0.6,
+  },
+  welcomeImage: {
+    width: '110%', // or a specific width
+    // height: 200, // or a specific height
+    alignSelf: "center",
+    
+    resizeMode: 'cover', // or 'cover', depending on your needs
+    marginBottom: 20, // Adjust as needed
   },
 });
 

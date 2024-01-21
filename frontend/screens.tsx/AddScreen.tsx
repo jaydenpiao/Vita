@@ -2,10 +2,50 @@ import { View, TouchableOpacity } from "react-native";
 import { Text, StyleSheet, TextInput, ScrollView } from "react-native";
 import HomeProfileCard from "../components/HomeProfileCard";
 import { Image } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from '@react-navigation/native';
+import React, {useRef, useState, useEffect} from 'react';
+
+import { db } from '../db/firebaseConfig';
+import { doc, getDoc } from 'firebase/firestore';
 
 const AddScreen = () => {
   const navigation = useNavigation();
+  const route = useRoute();
+  // const patientId = route.params?.patientId ?? '0';
+
+  const fetchPatientData = async (patientId) => {
+    try {
+      const docRef = doc(db, 'patients', patientId);
+      const docSnap = await getDoc(docRef);
+  
+      if (docSnap.exists()) {
+        console.log(`Patient ${patientId}'s Location:`, docSnap.data().location);
+        // Assuming you want to set the destination room based on the last fetched patient's data
+        // setDestinationRoom(docSnap.data().location);
+
+  
+        if (docSnap.data().is_having_heart_attack) {
+          // navigation.navigate("Map", {patientId: '0'})
+
+          console.log(`Patient ${patientId} is having a heart attack!`);
+          // navigation.navigate("Alertt");
+        }
+      } else {
+        console.log(`No such document for patient ${patientId}!`);
+      }
+    } catch (error) {
+      console.error('Error fetching patient data:', error);
+    }
+  };
+  
+  useEffect(() => {
+    fetchPatientData('0');
+    fetchPatientData('1');
+    // ... rest of your existing useEffect code
+  }, []);
+
+
+
   return (
     <View style={styles.container}>
       <Text style={styles.heading}>Add patients</Text>

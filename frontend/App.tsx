@@ -3,6 +3,8 @@ import { View, StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
+import AddScreen from "./screens.tsx/AddScreen";
+
 import Welcome from "./components/Welcome";
 import Tutorial2 from "./screens.tsx/Tutorial2";
 import Profiles from "./components/Profiles";
@@ -53,6 +55,11 @@ export default function App() {
           name="HomeEmpty"
           options={{ headerShown: false }}
           component={HomeEmpty}
+        />
+        <Stack.Screen
+          name="AddScreen"
+          options={{ headerShown: false }}
+          component={AddScreen}
         />
       </Stack.Navigator>
     </NavigationContainer>

@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
     height: 6,
     backgroundColor: "#1C1C1E",
     borderRadius: 6,
-    opacity: 0.6,
+    opacity: 0.3,
   },
   container: {
     display: "flex",

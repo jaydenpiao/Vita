@@ -7,7 +7,7 @@ function Welcome({ navigation }) {
       <Text style={styles.text}>Welcome!</Text>
       <Text style={styles.text}>This is an introduction to our app.</Text>
       {/* Button with no functionality yet */}
-      <Button title="Next" onPress={() => navigation.navigate('Map')} />
+      <Button title="Next" onPress={() => navigation.navigate('Profiles')} />
     </View>
   );
 };

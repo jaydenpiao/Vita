@@ -58,7 +58,7 @@ const Map = () => {
 
         // Check for 'is_having_heart_attack' field
         if (docSnap.data().is_having_heart_attack) {
-          console.log('yay');
+          console.log(`Patient ${patientId} is having a heart attack!`);
       } 
     } else {
         console.log('No such document!');

@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Image } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { TouchableOpacity } from "react-native";
 
@@ -13,6 +13,11 @@ const Tutorial3 = () => {
         <View style={styles.indicatorActive}></View>
         <View style={styles.indicatorActive}></View>
       </View>
+      {/* image */}
+      <Image
+    source={require("../assets/welcome.png")} // Update with the correct path
+    style={styles.welcomeImage}
+  />
       <View>
         <Text style={styles.heading}>And that’s it.</Text>
         <Text style={styles.text}>
@@ -79,6 +84,14 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginBottom: 24,
     opacity: 0.6,
+  },
+  welcomeImage: {
+    width: '110%', // or a specific width
+    // height: 200, // or a specific height
+    alignSelf: "center",
+    
+    resizeMode: 'cover', // or 'cover', depending on your needs
+    marginBottom: 20, // Adjust as needed
   },
 });
 

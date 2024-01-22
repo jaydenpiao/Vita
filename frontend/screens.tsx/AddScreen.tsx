@@ -20,15 +20,15 @@ const AddScreen = () => {
   
       if (docSnap.exists()) {
         console.log(`Patient ${patientId}'s Location:`, docSnap.data().location);
-        // Assuming you want to set the destination room based on the last fetched patient's data
+  
         // setDestinationRoom(docSnap.data().location);
-
   
         if (docSnap.data().is_having_heart_attack) {
           // navigation.navigate("Map", {patientId: '0'})
 
           console.log(`Patient ${patientId} is having a heart attack!`);
-          // navigation.navigate("Alertt");
+          // ALERT (DONE AFTER SUBMISSION)
+          navigation.navigate("Alertt", {patientId: patientId});
         }
       } else {
         console.log(`No such document for patient ${patientId}!`);

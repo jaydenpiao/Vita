@@ -1,5 +1,5 @@
-import React from "react";
-import { View, StyleSheet } from "react-native";
+import React, { useEffect } from 'react';
+import { View, StyleSheet, Alert } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
@@ -15,9 +15,34 @@ import useNavigation from "@react-navigation/native";
 import HomeEmpty from "./screens.tsx/HomeEmpty";
 import Tutorial3 from "./screens.tsx/Tutorial3";
 
+import { db } from './db/firebaseConfig';
+import { collection, query, where, onSnapshot } from 'firebase/firestore';
+import Alertt from './components/Alertt';
+
+
+
+
+
 const Stack = createNativeStackNavigator();
 
 export default function App() {
+
+  // const navigation = useNavigation();
+
+  // useEffect(() => {
+  //   const q = query(collection(db, 'patients'), where('is_having_heart_attack', '==', true));
+  //   const unsubscribe = onSnapshot(q, (snapshot) => {
+  //     snapshot.docChanges().forEach((change) => {
+  //       if (change.type === "added" || change.type === "modified") {
+  //         navigation.navigate('Map', { showOverlay: true });
+  //       }
+  //     });
+  //   });
+
+  //   return () => unsubscribe(); // Clean up the listener
+  // }, []);
+
+
   return (
     <NavigationContainer>
       <Stack.Navigator>
@@ -60,6 +85,11 @@ export default function App() {
           name="AddScreen"
           options={{ headerShown: false }}
           component={AddScreen}
+        />
+        <Stack.Screen
+          name="Alertt"
+          options={{ headerShown: false }}
+          component={Alertt}
         />
       </Stack.Navigator>
     </NavigationContainer>

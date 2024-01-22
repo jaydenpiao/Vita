@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
     marginTop: 4,
   },
   heading: {
-    fontWeight: "500",
+    // fontWeight: "500",
     fontSize: 22,
     lineHeight: 28,
     letterSpacing: 0.35,

@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Image } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { TouchableOpacity } from "react-native";
 
@@ -13,6 +13,11 @@ const Tutorial1 = () => {
         <View style={styles.indicatorInactive}></View>
         <View style={styles.indicatorInactive}></View>
       </View>
+      {/* image */}
+      <Image
+    source={require("../assets/tutorial1.png")} // Update with the correct path
+    style={styles.tutorial1}
+  />
       <View>
         <Text style={styles.heading}>Add patients for attentive tracking</Text>
         <Text style={styles.text}>
@@ -79,6 +84,14 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginBottom: 24,
     opacity: 0.6,
+  },
+  Tutorial1: {
+    // width: '80%', // or a specific width
+    height: '80%', // or a specific height
+    alignSelf: "center",
+    
+    resizeMode: 'cover', // or 'cover', depending on your needs
+    marginBottom: 20, // Adjust as needed
   },
 });
 

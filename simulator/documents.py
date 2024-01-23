@@ -51,14 +51,16 @@ class Contact:
 
 
 class SensorData:
-    def __init__(self, ecg: list, location: str):
+    def __init__(self, ecg: list, location: str, is_having_heart_attack: bool = False):
         self.__ecg = ecg
         self.__location = location
+        self.__is_having_heart_attack = is_having_heart_attack
     
     def to_dict(self):
         return {
             "ecg": self.__ecg,
-            "location": self.__location
+            "location": self.__location,
+            "is_having_heart_attack": self.__is_having_heart_attack
         }
 
     @property

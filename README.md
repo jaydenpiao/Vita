@@ -172,8 +172,33 @@ We were able to achieve 93% accuracy on our test dataset as a result of training
 
 
 ### Mobile Application ([`frontend/`](./frontend/)) :iphone:
+The mobile application was crafted using React Native with Expo, where we tranformed Figma designs into dynamic and functional React components.
 
+When the app is first launched, there are a series of welcome screens that give background information and instructions.
 
+<p align="center">
+    <img src="docs/vita_intro.png" alt="Vita Intro">
+</p>
+
+In the beginning of each shift, a care worker can add the patients they are assigned to.
+
+<p align="center">
+    <img src="docs/vita_add_patients.png" alt="Vita Add">
+</p>
+
+Next, they will be able to monitor the ECG readings of each patient that they have added in real time. There is also access to more detailed information of a patient.
+
+<p align="center">
+    <img src="docs/vita_patient.png" alt="Vita Patient">
+</p>
+
+Lastly, the care taker can view the indoor map rendered with the MappedIn SDK that contains the current locations of each of the patients that get updated as they move around due to Cloud Firestore.
+
+If a patient requires immediate assistance, our Heart Attack Detection Model will notify Firestore, where the update will be immediately reflected in our mobile application along with a push notification to alert care takers who are currently not in app. We used the MappedIn SDK to create the shortest path to reach the patient in need.
+
+<p align="center">
+    <img src="docs/vita_map.png" alt="Vita Map">
+</p>
 
 
 ## References :page_facing_up:

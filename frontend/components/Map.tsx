@@ -26,7 +26,7 @@ const rooms = ['ROOM 1', 'ROOM 2', 'ROOM 3', 'ROOM 4', 'ROOM 5', 'ROOM 6', 'ROOM
 
 const Map = () => {
   const mapView = React.useRef<MapViewStore>(null);
-  const [destinationRoom, setDestinationRoom] = useState('HEARTH ROOM'); 
+  const [destinationRoom, setDestinationRoom] = useState('ROOM 5'); 
   // const [showOverlay, setShowOverlay] = useState(false);
   const navigation = useNavigation();
 
@@ -88,7 +88,7 @@ const Map = () => {
         }} 
         onFirstMapLoaded={() => {
           const departure = mapView.current?.venueData?.locations.find(
-            (l: MappedinLocation) => l.name === 'PANTRY',
+            (l: MappedinLocation) => l.name === 'SPA BATH',
           );
           const destination = mapView.current?.venueData?.locations.find(
             (l: MappedinLocation) => l.name === destinationRoom,

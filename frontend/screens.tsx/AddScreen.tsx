@@ -19,7 +19,7 @@ const AddScreen = () => {
       const docSnap = await getDoc(docRef);
   
       if (docSnap.exists()) {
-        console.log(`Patient ${patientId}'s Location:`, docSnap.data().location);
+        // console.log(`Patient ${patientId}'s Location:`, docSnap.data().location);
   
         // setDestinationRoom(docSnap.data().location);
   
@@ -34,14 +34,22 @@ const AddScreen = () => {
         console.log(`No such document for patient ${patientId}!`);
       }
     } catch (error) {
-      console.error('Error fetching patient data:', error);
+      // console.error('Error fetching patient data:', error);
     }
   };
+
+  // setInterval(fetchPatientData, 10000);
   
   useEffect(() => {
-    fetchPatientData('0');
-    fetchPatientData('1');
-    // ... rest of your existing useEffect code
+    // fetchPatientData('0');
+    // fetchPatientData('1');
+    const patientIds = ['0', '1']; // Array of patient IDs to fetch data for
+    const intervals = patientIds.map(patientId => 
+      setInterval(() => fetchPatientData(patientId), 10000)
+    );
+
+    // Cleanup function to clear intervals when component unmounts
+    return () => intervals.forEach(clearInterval);
   }, []);
 
 
